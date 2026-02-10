@@ -66,6 +66,7 @@ import { Log } from '../../../log';
 import { env } from '../../../utils/env';
 import { CommandError } from '../../../utils/errors';
 import { toPosixPath } from '../../../utils/filePath';
+import { reloadEnvFiles } from '../../../utils/nodeEnv';
 import { getFreePortAsync } from '../../../utils/port';
 import { BundlerDevServer, BundlerStartOptions, DevServerInstance } from '../BundlerDevServer';
 import {
@@ -1128,7 +1129,7 @@ export class MetroBundlerDevServer extends BundlerDevServer {
     }
 
     const envFiles = runtimeEnv
-      .getFiles(process.env.NODE_ENV)
+      .getEnvFiles({ mode: process.env.NODE_ENV })
       .map((fileName) => path.join(this.projectRoot, fileName));
 
     observeFileChanges(
@@ -1140,7 +1141,7 @@ export class MetroBundlerDevServer extends BundlerDevServer {
       () => {
         debug('Reloading environment variables...');
         // Force reload the environment variables.
-        runtimeEnv.load(this.projectRoot, { force: true });
+        reloadEnvFiles(this.projectRoot);
       }
     );
   }
