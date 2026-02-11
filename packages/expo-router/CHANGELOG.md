@@ -12,6 +12,7 @@
 ### 🐛 Bug fixes
 
 - [web] Fix route URL detection in `useLoaderData` ([#42912](https://github.com/expo/expo/pull/42912) by [@hassankhan](https://github.com/hassankhan))
+- [ios] fix immediate navigation when opening Link.Preview ([#43071](https://github.com/expo/expo/pull/43071) by [@Ubax](https://github.com/Ubax))
 
 ### 💡 Others
 
